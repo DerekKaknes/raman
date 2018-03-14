@@ -1,0 +1,12 @@
+# Semi Supervised Learning with DCGAN on Raman Spectra Data
+
+1.	Reproduce CNN results from RRUD database
+2.	Gather large labeled database if possible
+3.	Gather spectra from small set of clinically labeled urine samples
+4.	Gather spectra from large unlabeled set of urine samples
+5.	Build Semi Supervised DCGAN using RRUD feature bottleneck as convolutions within Discriminator, add Dense layers and Softmax mapping to classes of all clinical states plus “generated”
+
+## Review of Literature
+Recent studies, such as [Bispo 2016](https://www.ncbi.nlm.nih.gov/pubmed/26933826), [Saatkamp 2016](https://www.ncbi.nlm.nih.gov/pubmed/27393683) and [Bispo 2017](https://www.ncbi.nlm.nih.gov/pubmed/28752262), have demonstrated the feasibility of using Raman Spectroscopy (RS) to estimate the concentrations of urine metabolites such as urea, creatinine and glucose.  These studies further demonstrated the feasibility of using these estimated metrics to create classification models to distinguish between healthy patients and patients with renal disease.  All of these studies use similar statistical methods to analyze spectra and produce their classification models.  Notably, each study uses polynomial-fit baselining to remove fluorescence followed by smoothing and normalization techniques.  After baselining the spectra, the studies then apply a partial least squared (PLS) regression to generate concentration estimates before using these estimates to produce a classifier.  
+
+A recent study by [Liu, Gibson, et al 2017](https://arxiv.org/abs/1708.09022) demonstrated the feasibility of using deep Convolutional Neural Networks (CNNs) as a universal solution for baselining and classifying Raman spectra of geological compounds.  The paper demonstrates that deep CNNs are able to more accurately process and classify raw Raman spectra than the leading baselining methodologies.  This opens an opportunity to apply transfer learning approaches to use the convolutional layers of the feature bottleneck as a general purpose baselining method across different Raman applications, including those in the biomedial field.  Beyond the advantage of superior classification performance, this transfer learning approach has the additional benefit of potentially reducing the amount of task-specific labelled data points required to train new classifiers.  If the existing feature bottleneck can fully handle the raw spectral processing, then the dense classifier layer may be able to train classifiers on the smaller labelled datasets common in biomedical applications.
